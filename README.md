@@ -1,0 +1,331 @@
+# 📅 Team Calendar
+
+A full-stack calendar application for teams to manage and share events.
+
+## 📖 Overview
+
+This application powers the Team Calendar, providing a user-friendly interface for teams to create, manage, and view shared events. The system consists of a React frontend and a Node.js/Express backend with MongoDB database.
+
+## 📁 Project Structure
+
+- `client/` - React frontend application
+  - **src/** – Source code of the React app:
+    * **components/** – React components:
+      * `Calendar.jsx` – Main calendar UI component
+      * `Login.jsx` – Login form/page component
+      * `Modal.jsx` – Popup/modal UI component
+    * **services/** – Logic for external services or API calls:
+      * `eventService.js` – Handles event-related API calls
+    * `App.js` – Root React component
+    * `App.css`, `index.css`, `styles.css` – Styling files
+    * `index.js` – React app entry point
+- `server/` - Node.js/Express backend API
+
+## 🛠️ Tech Stack
+
+- **Backend:** Node.js + Express, MongoDB (Mongoose)
+- **Frontend:** React
+- **Remote Access:** ngrok
+
+## 🚀 Setup & Installation
+
+### Server Setup (Backend)
+
+1. Navigate to the server directory:
+   ```
+   cd server
+   ```
+
+2. Install dependencies:
+   ```
+   npm install
+   ```
+
+3. Create a `.env` file in the server directory and add your MongoDB connection string:
+   ```
+   MONGODB_URI=your_mongodb_connection_string_here
+   ```
+
+4. Start the server:
+   ```
+   node server.js
+   ```
+
+5. The server will run on port 5000 by default (http://localhost:5000)
+
+### Client Setup (Frontend)
+
+1. Open a new terminal window/tab
+
+2. Navigate to the client directory:
+   ```
+   cd client
+   ```
+
+3. Install dependencies:
+   ```
+   npm install
+   ```
+
+4. Start the React development server:
+   ```
+   npm start
+   ```
+
+5. The frontend application will run on port 3000 (http://localhost:3000)
+
+### Remote Access with ngrok
+
+To make your backend accessible from anywhere:
+
+1. Open another terminal window/tab
+
+2. Run ngrok to expose your local server:
+   ```
+   ngrok http 5000
+   ```
+
+3. ngrok will provide a public URL (like `https://abc123def456.ngrok.io`)
+
+4. You can now access your backend API from anywhere using this URL
+   - Example: `https://abc123def456.ngrok.io/api/events`
+
+## 📚 API Documentation
+
+### Base URL
+
+All endpoints are accessible via the base URL `/api/events`
+
+### Endpoints
+
+#### Get All Events
+
+```
+GET /api/events
+```
+
+Returns a list of all events in the system.
+
+**Response Example:**
+```json
+[
+  {
+    "_id": "abc123",
+    "title": "Team Meeting",
+    "start": "2025-04-10T10:00:00.000Z",
+    "end": "2025-04-10T11:00:00.000Z",
+    "desc": "Discuss roadmap",
+    "allDay": false,
+    "createdBy": "musadiq"
+  }
+]
+```
+
+#### Get Single Event
+
+```
+GET /api/events/:id
+```
+
+Retrieves a specific event by its ID.
+
+**Example:** `/api/events/abc123`
+
+**Response Example:**
+```json
+{
+  "_id": "abc123",
+  "title": "Team Meeting",
+  "start": "2025-04-10T10:00:00.000Z",
+  "end": "2025-04-10T11:00:00.000Z",
+  "desc": "Discuss roadmap",
+  "createdBy": "musadiq"
+}
+```
+
+#### Get Events by User
+
+```
+GET /api/events/createdBy/:user
+```
+
+Retrieves all events created by a specific user.
+
+**Example:** `/api/events/createdBy/musadiq`
+
+**Response Example:**
+```json
+[
+  {
+    "title": "Demo Day",
+    "start": "2025-04-12T14:00:00.000Z",
+    "end": "2025-04-12T16:00:00.000Z",
+    "desc": "Final presentation",
+    "createdBy": "musadiq"
+  }
+]
+```
+
+#### Create Event
+
+```
+POST /api/events
+```
+
+Creates a new event in the calendar.
+
+**Request Body Example:**
+```json
+{
+  "title": "Hackathon",
+  "start": "2025-04-15T09:00:00Z",
+  "end": "2025-04-15T17:00:00Z",
+  "desc": "Build cool stuff",
+  "allDay": false,
+  "createdBy": "govu"
+}
+```
+
+**Response Example:**
+```json
+{
+  "_id": "xyz789",
+  "title": "Hackathon",
+  "start": "2025-04-15T09:00:00Z",
+  "end": "2025-04-15T17:00:00Z",
+  "desc": "Build cool stuff",
+  "createdBy": "govu"
+}
+```
+
+#### Update Event
+
+```
+PUT /api/events/:id
+```
+
+Updates an existing event by its ID.
+
+**Example:** `/api/events/abc123`
+
+**Request Body Example:**
+```json
+{
+  "title": "Updated Title"
+}
+```
+
+**Response Example:**
+```json
+{
+  "_id": "abc123",
+  "title": "Updated Title"
+}
+```
+
+#### Delete Event
+
+```
+DELETE /api/events/:id
+```
+
+Deletes an event by its ID.
+
+**Example:** `/api/events/abc123`
+
+**Response Example:**
+```json
+{ "message": "Event deleted successfully" }
+```
+
+#### Get Events in Date Range
+
+```
+GET /api/events/range?start=2025-04-01&end=2025-04-30
+```
+
+Retrieves events between specified start and end dates.
+
+**Response Example:**
+```json
+[
+  {
+    "title": "Demo Day",
+    "start": "2025-04-12T14:00:00.000Z",
+    "end": "2025-04-12T16:00:00.000Z"
+  }
+]
+```
+
+#### Get Upcoming Events
+
+```
+GET /api/events/upcoming
+```
+
+Retrieves all future events from the current date.
+
+**Response Example:**
+```json
+[
+  {
+    "title": "Presentation",
+    "start": "2025-04-22T12:00:00Z",
+    "end": "2025-04-22T13:00:00Z"
+  }
+]
+```
+
+#### Search Events
+
+```
+GET /api/events/search/:query
+```
+
+Searches for events by title or description.
+
+**Example:** `/api/events/search/hack`
+
+**Response Example:**
+```json
+[
+  {
+    "title": "Hackathon",
+    "desc": "Build cool stuff"
+  }
+]
+```
+
+## 💻 Usage Example
+
+```javascript
+// Example: Fetch all events
+fetch('/api/events')
+  .then(response => response.json())
+  .then(events => console.log(events))
+  .catch(error => console.error('Error fetching events:', error));
+```
+
+## ⚠️ Important Notes
+
+- Make sure MongoDB is up and running before starting the server
+- The backend API endpoints are accessible at http://localhost:5000/api/events
+- The frontend application will automatically connect to the backend
+- The ngrok URL is temporary and will change each time you restart ngrok (unless you have a paid account)
+
+## 🔍 Verifying Installation
+
+1. After starting both the client and server, open your browser to http://localhost:3000
+2. You should see the Team Calendar interface
+3. Test API access by visiting http://localhost:5000/api in your browser
+
+## 🛠️ Troubleshooting
+
+- If you encounter connection issues, verify MongoDB is running
+- Check the server logs for any errors related to database connection
+- If the client can't connect to the server, verify both are running and check for CORS issues
+- If ngrok shows errors, ensure your server is running properly on port 5000
+
+---
+
+Made with ❤️ by the Team 6
