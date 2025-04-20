@@ -90,6 +90,42 @@ To make your backend accessible from anywhere:
 4. You can now access your backend API from anywhere using this URL
    - Example: `https://abc123def456.ngrok.io/api/events`
 
+## ⚙️ Step-by-step: How to Use Ngrok
+
+### 🔧 1. Install ngrok
+
+If you're on Windows/Mac/Linux, just:
+- Download from: https://ngrok.com/download
+- Unzip → Move it to your system path or keep in project folder
+
+Or, using terminal (if installed via package manager):
+```bash
+brew install ngrok     # macOS
+choco install ngrok    # Windows
+```
+
+### 🔑 2. Connect Your Account
+
+After signup at ngrok.com, you'll get an Auth token.
+Run this once:
+```bash
+ngrok config add-authtoken YOUR_AUTH_TOKEN
+```
+
+### 🚀 3. Expose Your Local App
+
+If your backend runs on port 5000:
+```bash
+ngrok http 5000
+```
+
+You'll see something like:
+```
+Forwarding  https://randomstring.ngrok.io  ->  http://localhost:5000
+```
+
+Use that public URL (https://randomstring.ngrok.io) anywhere — e.g., for webhook testing or sharing with others.
+
 ## 📚 API Documentation
 
 ### Base URL
