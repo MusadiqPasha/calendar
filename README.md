@@ -27,13 +27,13 @@ This application powers the Team Calendar, providing a user-friendly interface f
 - **Frontend:** React
 - **Remote Access:** ngrok
   
-## 🚀 Setup & Installation [ Docker ]
+# 🚀 Setup & Installation [ Docker ]
 
-Stop your local MongoDB service if you have one running:
-# On Windows (Command Prompt as Administrator)
+### Stop your local MongoDB service if you have one running:
+### On Windows (Command Prompt as Administrator)
 net stop MongoDB
 
-# On Windows (PowerShell as Administrator)
+### On Windows (PowerShell as Administrator)
 Stop-Service -Name MongoDB
 
 ## Step 1 Create `.dockerignore` files 
