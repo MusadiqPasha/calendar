@@ -26,8 +26,79 @@ This application powers the Team Calendar, providing a user-friendly interface f
 - **Backend:** Node.js + Express, MongoDB (Mongoose)
 - **Frontend:** React
 - **Remote Access:** ngrok
+  
+## 🚀 Setup & Installation [ Docker ]
 
-## 🚀 Setup & Installation
+Stop your local MongoDB service if you have one running:
+# On Windows (Command Prompt as Administrator)
+net stop MongoDB
+
+# On Windows (PowerShell as Administrator)
+Stop-Service -Name MongoDB
+
+## Step 1 Create `.dockerignore` files 
+
+### Frontend .dockerignore
+Create a `.dockerignore` in the `client` directory:
+
+```
+node_modules
+npm-debug.log
+build
+```
+### Backend .dockerignore
+Create a `.dockerignore` in the `server` directory:
+
+```
+node_modules
+npm-debug.log
+.env
+```
+
+## Step 2: Run Docker Compose
+
+In the root directory of your project, run:
+
+```bash
+docker-compose up --build
+```
+
+This will:
+1. Build the Docker images for your client and server
+2. Start containers for MongoDB, client, and server
+3. Set up the network between them
+4. Map the ports so you can access them locally
+
+## Step 3: Running in the background
+
+```bash
+docker-compose up -d
+```
+
+## Step 4: Access Your Application
+
+- Frontend: http://localhost:3000
+- Backend API: http://localhost:5000/api
+- MongoDB: mongodb://localhost:27017/team-calendar
+
+
+### Stopping all containers
+
+```bash
+docker-compose down
+```
+
+### Using With ngrok
+
+You can still use ngrok with Docker, but you'll need to run it from your host machine:
+
+```bash
+ngrok http 5000
+```
+This will create a tunnel to your Docker container's exposed port 5000.
+
+
+## 🚀 Setup & Installation [ Without Docker ] 
 
 ### Server Setup (Backend)
 
