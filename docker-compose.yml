@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  # MongoDB service
+  mongo:
+    image: mongo:latest
+    container_name: team-calendar-mongo
+    restart: always
+    volumes:
+      - mongo-data:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - app-network
+
+  # Backend API service
+  server:
+    build: ./server
+    container_name: team-calendar-server
+    restart: always
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/team-calendar
+    networks:
+      - app-network
+
+  # Frontend client service
+  client:
+    build: ./client
+    container_name: team-calendar-client
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - server
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mongo-data:
+    driver: local
