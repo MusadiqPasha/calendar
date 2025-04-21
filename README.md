@@ -31,10 +31,10 @@ This application powers the Team Calendar, providing a user-friendly interface f
 
 ### Stop your local MongoDB service if you have one running:
 ### On Windows (Command Prompt as Administrator)
-net stop MongoDB
+`net stop MongoDB`
 
 ### On Windows (PowerShell as Administrator)
-Stop-Service -Name MongoDB
+`Stop-Service -Name MongoDB`
 
 ## Step 1 Create `.dockerignore` files 
 
