@@ -2,6 +2,8 @@
 
 A full-stack calendar application for teams to manage and share events.
 
+<img src="https://github.com/MusadiqPasha/calendar/blob/main/calendar.png">
+
 ## 📖 Overview
 
 This application powers the Team Calendar, providing a user-friendly interface for teams to create, manage, and view shared events. The system consists of a React frontend and a Node.js/Express backend with MongoDB database.
